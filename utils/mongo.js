@@ -1,5 +1,5 @@
 var MongoClient = require("mongodb").MongoClient;
-var url = "mongodb://localhost:27017";
+var url = process.env.MONGO_DB_URL || "mongodb+srv://admin:admin@cluster0.gt5ch.gcp.mongodb.net/";//"mongodb://localhost:27017";
 var mongoClient = undefined;
 
 let mongo = {
