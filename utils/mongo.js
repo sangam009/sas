@@ -1,6 +1,6 @@
 const { MongoClient } = require('mongodb');
 
-const url = process.env.MONGO_DB_URL || 'mongodb://localhost:27017'; // 'mongodb+srv://admin:admin@cluster0.gt5ch.gcp.mongodb.net/';
+const url = process.env.MONGO_DB_URL || 'mongodb+srv://admin:admin@cluster0.gt5ch.gcp.mongodb.net/'; // 'mongodb://localhost:27017'; 
 let mongoClient;
 
 const mongo = {
