@@ -1,17 +1,11 @@
-// ToDo : Explore Mongoose for type check
-class User {
-	constructor(id, token, email, name, provider) {
-		this.id = id;
-		this.token = token;
-		this.email = email;
-		this.name = name;
-		this.providers = [
-			{
-				provider,
-				id,
+var mongoose = require("mongoose");
+var Schema = mongoose.Schema;
+let userSchema = new Schema({
+  id: Number,
+  token: String,
+  email: String,
+  name: String,
+  provider: String,
+});
 
-			},
-		];
-	}
-}
-module.exports = User; 
+module.exports = mongoose.model("user", userSchema);
