@@ -1,11 +1,29 @@
-var mongoose = require("mongoose");
-var Schema = mongoose.Schema;
-let userSchema = new Schema({
-  id: Number,
-  token: String,
-  email: String,
-  name: String,
-  provider: String,
+const mongoose = require('mongoose');
+const Promise = require('bluebird');
+
+const { Schema } = mongoose;
+const UserSchema = new Schema({
+	id: Number,
+	token: String,
+	email: String,
+	name: String,
+	provider: String,
 });
 
-module.exports = mongoose.model("user", userSchema);
+UserSchema.statics = {
+	
+	get(id) {
+		return this.findById(id)
+			.exec()
+			.then((user) => {
+				if (user) {
+					return user;
+				}
+				const err = 'No such user exists!';
+				return Promise.reject(err);
+			});
+	},
+
+};
+
+module.exports = mongoose.model('user', UserSchema);
