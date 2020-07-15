@@ -3,9 +3,10 @@ const config = require('../config/auth');
 
 // Generate an Access Token for the given User ID
 function generateAccessToken(userId) {
-	const expiresIn = '1 hour';
-	const { audience, issuer, secret } = config.authentication.token;
-	
+	// 1hr
+	const expiresIn = Math.floor(Date.now() / 1000 + 3600);
+	const { audience, issuer, secret } = config.token;
+
 	const token = jwt.sign({}, secret, {
 		expiresIn,
 		audience,
