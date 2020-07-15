@@ -1,12 +1,13 @@
-const config = require("../../config/auth");
-class AuthConf {
-  constructor(type) {
-    this.type = type;
-  }
+const config = require('../../config/auth');
 
-  getConfig() {
-    return config[this.type];
-  }
+class AuthConf {
+	constructor(type) {
+		this.type = type;
+	}
+
+	getConfig() {
+		return config[this.type];
+	}
 }
 
 module.exports = AuthConf;

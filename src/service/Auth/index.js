@@ -31,26 +31,26 @@ class Auth extends AuthConf {
 		console.log(`generating token for user ID ${req.user.id}`);
 		const accessToken = token.generateAccessToken(req.user.id);
 		console.log(`access Token: ${accessToken}`);
-		try {
-			const data = new session();
-			const sessiondata = {
-				sessionId: `${accessToken}`,
-				userId: `${req.user.id}`,
-				provider: this.type,
-				createdAt: new Date(),
-				active: true,
-			};
-			await data.create(sessiondata);
-			if (!req.cookie || !req.cookie.userId) {
-				res.cookie('userId', crypto.encrypt(`${accessToken}`), {
-					maxAge: 1296000000,
-				});
-			}
-			res.redirect('/');
-		} catch (error) {
-			console.log(error);
-			next(error);
-		}
+		// try {
+		// 	const data = new session();
+		// 	const sessiondata = {
+		// 		sessionId: `${accessToken}`,
+		// 		userId: `${req.user.id}`,
+		// 		provider: this.type,
+		// 		createdAt: new Date(),
+		// 		active: true,
+		// 	};
+		// 	await data.create(sessiondata);
+		// 	if (!req.cookie || !req.cookie.userId) {
+		// 		res.cookie('userId', crypto.encrypt(`${accessToken}`), {
+		// 			maxAge: 1296000000,
+		// 		});
+		// 	}
+		// 	res.redirect('/');
+		// } catch (error) {
+		// 	console.log(error);
+		// 	next(error);
+		// }
 	}
 }
 
