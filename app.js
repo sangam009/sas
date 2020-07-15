@@ -11,7 +11,7 @@ const dbConnection = require('./src/utils/dbConnection');
 const app = express();
 
 // db connection
-dbConnection.getdbClient().then(() => console.log('connection is established')).catch((err) => console.error(err));
+dbConnection();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');

@@ -1,34 +1,32 @@
 const mongoose = require('mongoose');
+Promise = require('bluebird');
+mongoose.Promise = Promise;
+const devDbUrl = process.env.MONGO_DB_URL || 'mongodb://localhost:27017';
 
-const dbConnection = (function () {
-	const url = process.env.MONGO_DB_URL || 'mongodb://localhost:27017';
-	let mongoClient; 
+function dbConnection() {
+	mongoose.connect(devDbUrl, {
+		useNewUrlParser: true,
+		poolSize: 5,
+	});
 
-	async function dbConnect() {
-		mongoClient = await mongoose.connect(url, {
-			useNewUrlParser: true,
-			poolSize: 5,
+	mongoose.connection.on('connected', () => {
+		console.log(`Mongoose default connection is opent to ${devDbUrl}`);
+	});
+
+	mongoose.connection.on('error', (err) => {
+		console.log(`${err}`);
+		throw new Error(`unable to connect to the mongo db client ${devDbUrl}`);
+	});
+
+	mongoose.connection.on('disconnected', () => {
+		console.log('Mongoose default connection is disconnected');
+	});
+	process.on('SIGINT', () => {
+		mongoose.connection.close(() => {
+			console.log('Mongoose default connection is disconnected due to application termination');
+			process.exit(0);
 		});
-		return mongoClient;
-	}
-
-	async function getdbClient() {
-		try {
-			if (mongoClient) {
-				console.log('db connection is already alive');
-				return mongoClient;
-			} 
-			console.log('Establishing new connection');
-			mongoClient = await dbConnect();
-			return mongoClient;
-		} catch (error) {
-			console.log(error);
-			throw new Error('unable to connect to the mongo db client');
-		}
-	}
-	return {
-		getdbClient,
-	};
-}());
+	});
+}
 
 module.exports = dbConnection;
