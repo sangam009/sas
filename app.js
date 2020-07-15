@@ -4,9 +4,9 @@ const path = require('path');
 const logger = require('morgan');
 
 const passport = require('passport');
-const routes = require('./routes');
+const routes = require('./src/routes');
 
-const dbConnection = require('./utils/dbConnection');
+const dbConnection = require('./src/utils/dbConnection');
 
 const app = express();
 

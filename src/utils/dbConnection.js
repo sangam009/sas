@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const dbConnection = (function () {
-	const url = process.env.MONGO_DB_URL || 'mongodb+srv://admin:admin@cluster0.gt5ch.gcp.mongodb.net/sas'; // 'mongodb://localhost:27017';
+	const url = process.env.MONGO_DB_URL || 'mongodb://localhost:27017';
 	let mongoClient; 
 
 	async function dbConnect() {
