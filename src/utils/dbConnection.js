@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 Promise = require('bluebird');
+
 mongoose.Promise = Promise;
 const devDbUrl = process.env.MONGO_DB_URL || 'mongodb://localhost:27017';
 

@@ -1,17 +1,7 @@
 const mongoose = require('mongoose');
 
-const HomePageSchema = mongoose.Schema({
-	title: String,
-	priority: Number,
-	type: String,
-	data: [
-		{
-			url: String,
-			title: String,
-			imageUrl: String,
-			description: String,
-		},
-	],
-});
+// we want home API to be flexible 
+// not validating any data type or model defination
 
-module.exports = mongoose.model('home', HomePageSchema);
+const HomePageSchema = new mongoose.Schema({}, { strict: false });
+module.exports = mongoose.model('homes', HomePageSchema);
