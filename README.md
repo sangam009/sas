@@ -18,7 +18,7 @@ Add more general information about project. What the purpose of the project is? 
 
 
 ## Setup
-Insatll
+Install
 * `sh build.sh -t latest`
 * `docker run -it -p 3000:3000  --rm amazing-product/sas:latest`
 
